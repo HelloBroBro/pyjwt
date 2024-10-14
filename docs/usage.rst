@@ -60,17 +60,33 @@ RSA encoding and decoding require the ``cryptography`` module. See :ref:`install
     {'some': 'payload'}
 
 Encoding & Decoding Tokens with EdDSA (Ed25519)
--------------------------------------------
+-----------------------------------------------
 
 EdDSA encoding and decoding require the ``cryptography`` module. See :ref:`installation_cryptography`.
 
 .. code-block:: pycon
+
     >>> import jwt
     >>> private_key = "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIPtUxyxlhjOWetjIYmc98dmB2GxpeaMPP64qBhZmG13r\n-----END PRIVATE KEY-----\n"
     >>> public_key = "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEA7p4c1IU6aA65FWn6YZ+Bya5dRbfd4P6d4a6H0u9+gCg=\n-----END PUBLIC KEY-----\n"
     >>> encoded = jwt.encode({"some": "payload"}, private_key, algorithm="EdDSA")
     >>> jwt.decode(encoded, public_key, algorithms=["EdDSA"])
     {'some': 'payload'}
+
+Encoding & Decoding Tokens with ES256 (ECDSA)
+---------------------------------------------
+
+ECDSA encoding and decoding require the ``cryptography`` module. See :ref:`installation_cryptography`.
+
+.. code-block:: pycon
+
+    >>> import jwt
+    >>> private_key = b"-----BEGIN EC PRIVATE KEY-----\nMHcCAQEEIHAhM7P6HG3LgkDvgvfDeaMA6uELj+jEKWsSeOpS/SfYoAoGCCqGSM49\nAwEHoUQDQgAEXHVxB7s5SR7I9cWwry/JkECIRekaCwG3uOLCYbw5gVzn4dRmwMyY\nUJFcQWuFSfECRK+uQOOXD0YSEucBq0p5tA==\n-----END EC PRIVATE KEY-----\n"
+    >>> public_key = b"-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEXHVxB7s5SR7I9cWwry/JkECIReka\nCwG3uOLCYbw5gVzn4dRmwMyYUJFcQWuFSfECRK+uQOOXD0YSEucBq0p5tA==\n-----END PUBLIC KEY-----\n"
+    >>> encoded = jwt.encode({"some": "payload"}, private_key, algorithm="ES256")
+    >>> jwt.decode(encoded, public_key, algorithms=["ES256"])
+    {'some': 'payload'}
+
 
 Specifying Additional Headers
 -----------------------------
